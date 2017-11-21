@@ -89,6 +89,26 @@ functions:
 #      variable2: value2
 
 # you can add CloudFormation resource templates here
+resources:
+  AWSTemplateFormatVersion: "2010-09-09"
+  Description: "Sample DDB Table"
+  Resources:
+    HelloCounterDynamoDBTable:
+      Type: "AWS::DynamoDB::Table"
+      Properties:
+        TableName: "HelloCounter"
+        AttributeDefinitions:
+          -
+            AttributeName: "CounterId"
+            AttributeType: "S"
+        KeySchema:
+          -
+            AttributeName: "CounterId"
+            KeyType: "HASH"
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+
 #resources:
 #  Resources:
 #    NewResource:
