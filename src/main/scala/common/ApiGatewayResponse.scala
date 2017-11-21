@@ -1,4 +1,4 @@
-package hello
+package common
 
 import scala.beans.BeanProperty
 
