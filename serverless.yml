@@ -54,6 +54,10 @@ package:
 functions:
   hello:
     handler: hello.Handler
+  counter:
+    handler: dynamodb.CounterHandler
+    environment:
+      counterTable: ${cf:serverless-my-scala-service-dev.HelloCounterDynamoDBTableName}
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
@@ -113,7 +117,10 @@ resources:
       Description: "ARN of the HelloCounterDynamoDBTable"
       Value:
         "Fn::GetAtt": [ HelloCounterDynamoDBTable, Arn ]
-
+    HelloCounterDynamoDBTableName:
+      Description: "Name of the HelloCounterDynamoDBTable"
+      Value:
+        Ref: HelloCounterDynamoDBTable
 
 #resources:
 #  Resources:
