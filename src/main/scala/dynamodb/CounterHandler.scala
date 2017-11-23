@@ -31,16 +31,14 @@ class CounterHandler extends RequestHandler[Request, Response] {
     logger.log("init get table name")
     val tableName = Option(System.getenv("counterTable")).getOrElse("DUMMYTABLE")
 
-    logger.log("init dynamo")
+    logger.log(s"init dynamo $tableName")
     val client = AmazonDynamoDBClientBuilder.defaultClient()
-    val keyMap = Map("counterId" -> new AttributeValue().withS("flibble"))
+    val keyMap = Map("CounterId" -> new AttributeValue().withS("flibble"))
     val keyMapJava = JavaConverters.mapAsJavaMap(keyMap)
-    val req = new GetItemRequest().withTableName(tableName).withAttributesToGet("counterValue").withKey(keyMapJava)
+    val req = new GetItemRequest().withTableName(tableName).withAttributesToGet("CounterValue").withKey(keyMapJava)
 
     val result = client.getItem(req)
-
     val item = result.getItem()
-
 
     val dbVal = if (item == null) {
       logger.log(s"item was null")
@@ -49,7 +47,7 @@ class CounterHandler extends RequestHandler[Request, Response] {
       logger.log("item was empty")
       "was empty"
     } else {
-      JavaConverters.mapAsScalaMap(item).get("counterValue").map(_.getN).getOrElse("no value")
+      JavaConverters.mapAsScalaMap(item).get("CounterValue").map(_.getN).getOrElse("no value")
     }
 
     Response(s"Go Serverless v1.0! Your counter function executed successfully!  dbVal was $dbVal", input)
