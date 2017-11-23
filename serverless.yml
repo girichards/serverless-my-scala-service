@@ -67,6 +67,10 @@ functions:
     handler: dynamodb.CounterHandler
     environment:
       counterTable: ${cf:serverless-my-scala-service-dev.HelloCounterDynamoDBTableName}
+  incCounter:
+    handler: dynamodb.IncCounterHandler
+    environment:
+      counterTable: ${cf:serverless-my-scala-service-dev.HelloCounterDynamoDBTableName}
 
 
 
