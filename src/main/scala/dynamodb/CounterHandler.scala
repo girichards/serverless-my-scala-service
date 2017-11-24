@@ -11,18 +11,6 @@ import common.{ApiGatewayResponse, Request, Response}
 
 import scala.collection.JavaConverters
 
-
-trait DDB {
-
-  val tableName = "HelloCounter"
-  val client = AmazonDynamoDBClientBuilder.defaultClient()
-  val keyMap = Map("counterId" -> new AttributeValue().withS("flibble"))
-  val keyMapJava = JavaConverters.mapAsJavaMap(keyMap)
-  val req = new GetItemRequest().withTableName(tableName).withAttributesToGet("counterValue").withKey(keyMapJava)
-
-}
-
-
 class CounterHandler extends RequestHandler[Request, Response] {
 
   val counterId = "CounterId"

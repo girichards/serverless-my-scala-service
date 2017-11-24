@@ -71,6 +71,12 @@ functions:
     handler: dynamodb.IncCounterHandler
     environment:
       counterTable: ${cf:serverless-my-scala-service-dev.HelloCounterDynamoDBTableName}
+  snsHandler:
+    handler: handlers.GeneralHandler
+    events:
+      - sns: hello-topic
+    environment:
+      counterTable: ${cf:serverless-my-scala-service-dev.HelloCounterDynamoDBTableName}
 
 
 
